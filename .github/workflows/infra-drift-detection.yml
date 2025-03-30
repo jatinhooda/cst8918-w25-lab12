@@ -1,0 +1,35 @@
+name: 'Terraform Drift Detection'
+
+on:
+  schedule:
+    - cron: '0 2 * * *'  # Runs daily at 2 AM UTC
+
+defaults:
+  run:
+    working-directory: ./infra/tf-app
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  terraform-drift-detection:
+    name: 'Terraform Drift Detection'
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v3
+
+    - name: Terraform Init
+      run: terraform init
+
+    - name: Terraform Plan (Drift Check)
+      run: terraform plan -detailed-exitcode || true
+
+    - name: Notify on Drift
+      if: failure()
+      run: echo "⚠️ Infrastructure drift detected!"
