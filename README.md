@@ -2,4 +2,4 @@
 ## Team Members
 
 - Jatin Hooda (hood0034) - [GitHub](https://github.com/jatinhooda)
-- [Vananh Phan] (viphan123) - [GitHub](https://github.com/viphan123)
+- Vananh Phan (viphan123) - [GitHub](https://github.com/viphan123)
